@@ -92,23 +92,7 @@ app.onError(async (err, c) => {
   }
 });
 
-const mqtt = MqttSingelton.getInstance().mqttClient;
-mqtt.on('connect', () => {
-  logger.info('[MQTT]: Connected to broker');
-
-  mqtt.subscribe('test', (err) => {
-    if (!err) {
-      logger.info('[MQTT]: Successfully connect to "test" topic');
-      mqtt.publish('test', 'IoT Server Connect To Broker');
-    } else {
-      logger.error('[MQTT]: Failed connect to "test" topic: ', err);
-    }
-  });
-});
-
-mqtt.on('message', (topic, message) => {
-  logger.info(`[MQTT]: Receive new data from "${topic}": ${message}`);
-});
+MqttSingelton.new();
 
 export default {
   port: Number(Bun.env.PORT),

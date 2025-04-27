@@ -10,6 +10,12 @@ export class MqttSingelton {
     this.mqttClient = mqtt.connect('mqtt://dimasaulia.com');
   }
 
+  public static new(): MqttSingelton {
+    logger.info('[MQTT]: Create New Mqtt Instance');
+    MqttSingelton.mqttInstance = new MqttSingelton();
+    return MqttSingelton.mqttInstance;
+  }
+
   public static getInstance(): MqttSingelton {
     logger.info('[MQTT]: Find Mqtt Instance');
 
