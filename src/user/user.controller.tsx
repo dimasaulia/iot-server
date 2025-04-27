@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
 import {
-  EofficeRequest,
   GoogleUserResponse,
   LoginUserRequest,
   RegisterUserRequest,
@@ -64,24 +63,6 @@ userController.get('/google/callback', async (c) => {
   });
 
   return c.redirect('/dashboard/attendance');
-});
-
-userController.put('/eoffice', apiAuthMiddleware, async (c) => {
-  const req = (await c.req.json()) as EofficeRequest;
-  const [resp, isSuccess] = await UserService.syncEoffice(req, c);
-
-  c.status(isSuccess ? 200 : 400);
-  return c.json({
-    message: resp,
-  });
-});
-
-userController.put('/job', apiAuthMiddleware, async (c) => {
-  const resp = await UserService.setJob(c);
-  return c.json({
-    message: 'Sukses Memperbaharui Pekerjaan User',
-    data: resp,
-  });
 });
 
 userController.get('/logout', async (c) => {

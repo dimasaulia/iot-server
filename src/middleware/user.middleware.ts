@@ -68,17 +68,3 @@ export const webAuthMiddleware = async (c: Context, next: Next) => {
     });
   }
 };
-
-export const webEofficeMiddleware = async (c: Context, next: Next) => {
-  const userData: UserData = await c.get('userData');
-  const isEofficeSync = await UserServiceMiddleware.verifyEoffice(userData);
-  if (!isEofficeSync) return c.redirect('/dashboard/eoffice');
-  return next();
-};
-
-export const webJobMiddleware = async (c: Context, next: Next) => {
-  const userData: UserData = await c.get('userData');
-  const isEofficeSync = await UserServiceMiddleware.verifyJob(userData);
-  if (!isEofficeSync) return c.redirect('/dashboard/job');
-  return next();
-};

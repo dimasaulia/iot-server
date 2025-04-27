@@ -8,21 +8,16 @@ import {
   GoogleUserResponse,
   LoginUserRequest,
   UserData,
-  EofficeRequest,
-  SetUserJobRequest,
 } from './user.model';
 import { UserValidation } from './user.validation';
 import { HTTPException } from 'hono/http-exception';
 import { generateState, OAuth2Client } from 'oslo/oauth2';
 import { getCookie, setCookie } from 'hono/cookie';
 import {
-  googleOAuth2Client,
   redirectGoogleAuthEndpoint,
   tokenEndpoint,
 } from '../providers/gapi.providers';
-import { decode, sign, verify } from 'hono/jwt';
-import { userDoLogin } from '../providers/attendance.providers';
-import { encryptText } from '../providers/encription.providers';
+import { sign } from 'hono/jwt';
 import { User } from '@prisma/client';
 
 export class UserService {
@@ -172,7 +167,6 @@ export class UserService {
         password: true,
         full_name: true,
         provider: true,
-        job_id: true,
         role: {
           select: {
             name: true,
@@ -273,56 +267,5 @@ export class UserService {
     );
 
     return (await response.json()) as GoogleUserResponse;
-  }
-
-  static async syncEoffice(
-    request: EofficeRequest,
-    c: Context
-  ): Promise<[string, Boolean]> {
-    const req: EofficeRequest = UserValidation.EOFFICE.parse(request);
-    const userData: UserData = await c.get('userData');
-
-    const [resp, _] = await userDoLogin(req.username, req.password);
-
-    if (resp) {
-      await prisma.user.update({
-        data: {
-          eoffice_username: req.username,
-          eoffice_password: encryptText(req.password),
-        },
-        where: {
-          user_id: userData.user_id,
-        },
-      });
-    }
-
-    return resp
-      ? ['Sukses Melakukan Integrasi Ke Eoffice', true]
-      : ['Gagal Melakukan Integrasi Ke Eoffice', false];
-  }
-
-  static async setJob(c: Context): Promise<UserResponse> {
-    const req: SetUserJobRequest = UserValidation.SET_USER_JOB.parse(
-      await c.req.json()
-    );
-    const userData: UserData = await c.get('userData');
-
-    const job = await prisma.job.count({ where: { job_id: +req.job_id } });
-
-    if (job < 1)
-      throw new HTTPException(500, {
-        message: 'Data Job tidak ditemukan',
-      });
-
-    const user = await prisma.user.update({
-      data: {
-        job_id: +req.job_id,
-      },
-      where: {
-        user_id: userData.user_id,
-      },
-    });
-
-    return toUserResponse(user);
   }
 }

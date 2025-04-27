@@ -16,144 +16,24 @@ model Role {
 }
 
 model User {
-  user_id             String        @id @default(uuid())
-  username            String        @unique
-  email               String        @unique
+  user_id             String    @id @default(uuid())
+  username            String    @unique
+  email               String    @unique
   password            String?
   provider            Provider?
   provider_id         String?
   full_name           String
-  eoffice_username    String?
-  eoffice_password    String?
-  account_is_verified Boolean       @default(false)
-  email_is_verified   Boolean       @default(false)
+  account_is_verified Boolean   @default(false)
+  email_is_verified   Boolean   @default(false)
   password_updated_at DateTime
-  created_at          DateTime      @default(now())
-  updated_at          DateTime      @updatedAt
-  role                Role          @relation(fields: [role_id], references: [role_id])
-  job                 Job?          @relation(fields: [job_id], references: [job_id])
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+  role                Role      @relation(fields: [role_id], references: [role_id])
   role_id             String
-  scheduler           Scheduler[]
-  attendance          Attendance[]
-  job_activity        JobActivity[]
-  location            Location[]
-  job_id              Int?
-}
-
-model Scheduler {
-  scheduler_id Int      @id @default(autoincrement())
-  task_id      String
-  task_time    DateTime
-  task_data    Json
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
-  user         User?    @relation(fields: [user_id], references: [user_id])
-  user_id      String?
-}
-
-model Attendance {
-  attendance_id           Int       @id @default(autoincrement())
-  is_sunday               Boolean   @default(false)
-  is_monday               Boolean   @default(false)
-  is_tuesday              Boolean   @default(false)
-  is_wednesday            Boolean   @default(false)
-  is_thursday             Boolean   @default(false)
-  is_friday               Boolean   @default(false)
-  is_saturday             Boolean   @default(false)
-  late_min_time_sunday    Int       @default(0)
-  late_min_time_monday    Int       @default(0)
-  late_min_time_tuesday   Int       @default(0)
-  late_min_time_wednesday Int       @default(0)
-  late_min_time_thursday  Int       @default(0)
-  late_min_time_friday    Int       @default(0)
-  late_min_time_saturday  Int       @default(0)
-  late_max_time_sunday    Int       @default(0)
-  late_max_time_monday    Int       @default(0)
-  late_max_time_tuesday   Int       @default(0)
-  late_max_time_wednesday Int       @default(0)
-  late_max_time_thursday  Int       @default(0)
-  late_max_time_friday    Int       @default(0)
-  late_max_time_saturday  Int       @default(0)
-  location_sunday         Location? @relation(fields: [location_sunday_id], references: [location_id], name: "location_sunday")
-  location_monday         Location? @relation(fields: [location_monday_id], references: [location_id], name: "location_monday")
-  location_tuesday        Location? @relation(fields: [location_tuesday_id], references: [location_id], name: "location_tuesday")
-  location_wednesday      Location? @relation(fields: [location_wednesday_id], references: [location_id], name: "location_wednesday")
-  location_thursday       Location? @relation(fields: [location_thursday_id], references: [location_id], name: "location_thursday")
-  location_friday         Location? @relation(fields: [location_friday_id], references: [location_id], name: "location_friday")
-  location_saturday       Location? @relation(fields: [location_saturday_id], references: [location_id], name: "location_saturday")
-  is_active               Boolean   @default(true)
-  via                     Via
-  kondisi                 String
-  created_at              DateTime  @default(now())
-  updated_at              DateTime? @updatedAt
-  user                    User?     @relation(fields: [user_id], references: [user_id])
-  user_id                 String?
-  location_sunday_id      Int?
-  location_monday_id      Int?
-  location_tuesday_id     Int?
-  location_wednesday_id   Int?
-  location_thursday_id    Int?
-  location_friday_id      Int?
-  location_saturday_id    Int?
-}
-
-model Job {
-  job_id       Int           @id @default(autoincrement())
-  name         String
-  job_activity JobActivity[]
-  created_at   DateTime      @default(now())
-  updated_at   DateTime?     @updatedAt
-  User         User[]
-}
-
-model JobActivity {
-  job_activityid Int       @id @default(autoincrement())
-  name           String?
-  created_at     DateTime  @default(now())
-  updated_at     DateTime? @updatedAt
-  job            Job?      @relation(fields: [job_id], references: [job_id])
-  job_id         Int?
-  user           User?     @relation(fields: [user_id], references: [user_id])
-  user_id        String?
-}
-
-model Location {
-  location_id          Int          @id @default(autoincrement())
-  name                 String       @unique
-  lokasi               String
-  alamat               String
-  state                String
-  provinsi             String
-  created_at           DateTime     @default(now())
-  updated_at           DateTime?    @updatedAt
-  user                 User?        @relation(fields: [user_id], references: [user_id])
-  user_id              String?
-  sunday_attendance    Attendance[] @relation("location_sunday")
-  monday_attendance    Attendance[] @relation("location_monday")
-  tuesday_attendance   Attendance[] @relation("location_tuesday")
-  wednesday_attendance Attendance[] @relation("location_wednesday")
-  thursday_attendance  Attendance[] @relation("location_thursday")
-  friday_attendance    Attendance[] @relation("location_friday")
-  saturday_attendance  Attendance[] @relation("location_saturday")
-}
-
-enum Via {
-  WFS
-  WFO
 }
 
 enum Provider {
   GOOGLE
   MANUAL
   MANUAL_GOOGLE
-}
-
-enum Day {
-  SUNDAY
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
 }

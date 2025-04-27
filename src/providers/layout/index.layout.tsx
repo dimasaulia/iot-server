@@ -52,7 +52,7 @@ export default function Layout({
         ></script>
 
         <link rel="stylesheet" href={cssFile} />
-        <title>Eoffice Auto</title>
+        <title>IoT Server</title>
       </head>
       <body class="bg-gray-50">{children}</body>
 

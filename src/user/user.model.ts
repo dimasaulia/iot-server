@@ -25,7 +25,6 @@ export type UserResponse = {
 
 export type UserData = {
   user_id: string;
-  job_id: number | null;
   username: string;
   name: string;
   role: string;
@@ -39,15 +38,6 @@ export type GoogleUserResponse = {
   picture: string;
   email: string;
   email_verified: boolean;
-};
-
-export type EofficeRequest = {
-  username: string;
-  password: string;
-};
-
-export type SetUserJobRequest = {
-  job_id: Number;
 };
 
 export function toUserResponse(user: User): UserResponse {

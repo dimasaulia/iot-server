@@ -27,8 +27,4 @@ export class UserValidation {
     username: z.string().min(1),
     password: z.string().min(1),
   });
-
-  static readonly SET_USER_JOB: ZodType = z.object({
-    job_id: z.number(),
-  });
 }
