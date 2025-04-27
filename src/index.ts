@@ -13,6 +13,7 @@ import { UserData } from './user/user.model';
 import { logger } from './providers/logging.providers';
 import { authWeb } from './web/auth.web';
 import { apiAuthMiddleware } from './middleware/user.middleware';
+import { MqttSingelton } from './providers/mqtt.providers';
 const store = new CookieStore();
 
 type Variables = {
@@ -89,6 +90,24 @@ app.onError(async (err, c) => {
       errors: err.message,
     });
   }
+});
+
+const mqtt = MqttSingelton.getInstance().mqttClient;
+mqtt.on('connect', () => {
+  logger.info('[MQTT]: Connected to broker');
+
+  mqtt.subscribe('test', (err) => {
+    if (!err) {
+      logger.info('[MQTT]: Successfully connect to "test" topic');
+      mqtt.publish('test', 'IoT Server Connect To Broker');
+    } else {
+      logger.error('[MQTT]: Failed connect to "test" topic: ', err);
+    }
+  });
+});
+
+mqtt.on('message', (topic, message) => {
+  logger.info(`[MQTT]: Receive new data from "${topic}": ${message}`);
 });
 
 export default {

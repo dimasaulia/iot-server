@@ -24,6 +24,7 @@
     "hono-sessions": "^0.7.0",
     "imagesloaded": "^5.0.0",
     "masonry-layout": "^4.2.2",
+    "mqtt": "^5.11.1",
     "node-cron": "^3.0.3",
     "oslo": "^1.2.1",
     "postcss-cli": "^11.0.0",
