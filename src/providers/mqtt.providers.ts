@@ -16,6 +16,7 @@ export class MqttSingelton {
     if (!MqttSingelton.mqttInstance) {
       logger.info('[MQTT]: Create New Instance');
       MqttSingelton.mqttInstance = new MqttSingelton();
+      return MqttSingelton.mqttInstance;
     }
 
     logger.info('[MQTT]: Mqtt return existing instance');
