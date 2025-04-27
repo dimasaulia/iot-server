@@ -30,6 +30,40 @@ model User {
   updated_at          DateTime  @updatedAt
   role                Role      @relation(fields: [role_id], references: [role_id])
   role_id             String
+  Device              Device[]
+}
+
+model Device {
+  device_id   Int      @id @default(autoincrement())
+  device_code String   @unique
+  description String?
+  firmware    String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  User        User?    @relation(fields: [user_id], references: [user_id])
+  user_id     String?
+  Sensor      Sensor[]
+}
+
+model Sensor {
+  sensor_id    Int            @id @default(autoincrement())
+  sensor_code  String
+  description  String?
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+  Device       Device?        @relation(fields: [device_id], references: [device_id])
+  device_id    Int?
+  SensorRecord SensorRecord[]
+}
+
+model SensorRecord {
+  sensor_record_id Int      @id @default(autoincrement())
+  value            Float?
+  raw_value        Float?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  Sensor           Sensor?  @relation(fields: [sensor_id], references: [sensor_id])
+  sensor_id        Int?
 }
 
 enum Provider {
