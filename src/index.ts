@@ -14,6 +14,7 @@ import { logger } from './providers/logging.providers';
 import { authWeb } from './web/auth.web';
 import { apiAuthMiddleware } from './middleware/user.middleware';
 import { MqttSingelton } from './providers/mqtt.providers';
+import { deviceController } from './device/device.controller';
 const store = new CookieStore();
 
 type Variables = {
@@ -63,6 +64,7 @@ app.get('/health', async (c) => {
 });
 app.route('/auth', authWeb);
 app.route('/api/users/', userController);
+app.route('/api/device', deviceController);
 
 app.onError(async (err, c) => {
   if (err instanceof HTTPException) {
