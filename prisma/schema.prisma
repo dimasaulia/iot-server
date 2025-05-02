@@ -10,9 +10,9 @@ datasource db {
 model Role {
   role_id    String   @id @default(cuid())
   name       String   @unique
-  user       User[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  user       User[]
 }
 
 model User {
@@ -20,17 +20,17 @@ model User {
   username            String    @unique
   email               String    @unique
   password            String?
-  provider            Provider?
-  provider_id         String?
   full_name           String
   account_is_verified Boolean   @default(false)
   email_is_verified   Boolean   @default(false)
   password_updated_at DateTime
   created_at          DateTime  @default(now())
   updated_at          DateTime  @updatedAt
-  role                Role      @relation(fields: [role_id], references: [role_id])
   role_id             String
+  provider            Provider?
+  provider_id         String?
   Device              Device[]
+  role                Role      @relation(fields: [role_id], references: [role_id])
 }
 
 model Device {
@@ -40,8 +40,8 @@ model Device {
   firmware    String?
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  User        User?    @relation(fields: [user_id], references: [user_id])
   user_id     String?
+  User        User?    @relation(fields: [user_id], references: [user_id])
   Sensor      Sensor[]
 }
 
@@ -49,10 +49,11 @@ model Sensor {
   sensor_id    Int            @id @default(autoincrement())
   sensor_code  String
   description  String?
+  type         String?
   created_at   DateTime       @default(now())
   updated_at   DateTime       @updatedAt
-  Device       Device?        @relation(fields: [device_id], references: [device_id])
   device_id    Int?
+  Device       Device?        @relation(fields: [device_id], references: [device_id])
   SensorRecord SensorRecord[]
 }
 
@@ -62,8 +63,8 @@ model SensorRecord {
   raw_value        Float?
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
-  Sensor           Sensor?  @relation(fields: [sensor_id], references: [sensor_id])
   sensor_id        Int?
+  Sensor           Sensor?  @relation(fields: [sensor_id], references: [sensor_id])
 }
 
 enum Provider {
