@@ -57,6 +57,7 @@ export class DeviceService {
               sensor_code: sensorRecord.sensor_id,
               description: sensorRecord.sensor_description,
               device_id: deviceId,
+              type: sensorRecord.sensor_type,
             },
             select: {
               sensor_id: true,
