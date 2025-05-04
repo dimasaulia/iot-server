@@ -15,6 +15,7 @@ import { authWeb } from './web/auth.web';
 import { apiAuthMiddleware } from './middleware/user.middleware';
 import { MqttSingelton } from './providers/mqtt.providers';
 import { deviceController } from './device/device.controller';
+import { dashboardWeb } from './web/dashboard.web';
 const store = new CookieStore();
 
 type Variables = {
@@ -63,6 +64,7 @@ app.get('/health', async (c) => {
   return c.text('Server Working');
 });
 app.route('/auth', authWeb);
+app.route('/dashboard', dashboardWeb);
 app.route('/api/users/', userController);
 app.route('/api/device', deviceController);
 

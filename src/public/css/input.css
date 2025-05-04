@@ -34,3 +34,50 @@ h5 {
 h6 {
   @apply text-base;
 }
+
+.bg-glass {
+  @apply bg-gradient-to-b from-slate-100/35 to-slate-200/35 rounded-md bg-clip-padding backdrop-filter backdrop-blur-3xl;
+}
+
+.bg-glass-over-image {
+  @apply bg-gradient-to-b from-slate-100/5 to-slate-200/5 rounded-md bg-clip-padding backdrop-filter backdrop-blur-[1.5px];
+}
+
+.slider-wrapper {
+  @apply w-full h-24 relative;
+}
+
+.slider-wrapper::before,
+.slider-wrapper::after {
+  @apply block absolute z-[99] text-white w-full text-center text-3xl leading-[1] px-[0.75rem] py-0 pointer-events-none;
+}
+
+.slider-wrapper::before {
+  content: '+';
+  top: 50%;
+  left: 50%;
+  transform: translate(-5%, -60%);
+}
+
+.slider-wrapper::after {
+  content: '-';
+  top: 50%;
+  left: 50%;
+  transform: translate(-95%, -60%);
+}
+
+input[type='range'] {
+  @apply [appearance:none] [-webkit-appearance:none] absolute top-[50%] left-[50%] m-0 p-0 w-full h-20 translate-x-[-50%] translate-y-[-50%] overflow-hidden cursor-row-resize bg-gradient-to-r from-slate-700 via-slate-800 to-slate-950 rounded-md;
+}
+
+.shadow-custom {
+  box-shadow: -20rem 0 0 20rem rgba(255, 255, 255, 0.2);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  @apply [appearance:none] [-webkit-appearance:none] w-1 shadow-custom;
+}
+
+input[type='range']::-moz-range-thumb {
+  @apply [appearance:none] [-webkit-appearance:none] w-1 shadow-custom;
+}

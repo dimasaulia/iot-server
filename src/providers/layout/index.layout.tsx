@@ -54,7 +54,9 @@ export default function Layout({
         <link rel="stylesheet" href={cssFile} />
         <title>IoT Server</title>
       </head>
-      <body class="bg-gray-50">{children}</body>
+      <body class="bg-gradient-to-tr from-gray-700 via-slate-900 to-black font-pjs overflow-hidden">
+        {children}
+      </body>
 
       {typeof js === 'object' && js
         ? js.map((path) => <script src={path}></script>)

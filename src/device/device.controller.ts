@@ -13,24 +13,24 @@ deviceController.get('/', async (c) => {
   });
 });
 
-mqtt.on('connect', () => {
-  mqtt.subscribe(mqttTopic, (err) => {
-    if (!err) {
-      logger.info(`[MQTT]: Success Connect to "${mqttTopic}"`);
-    } else {
-      logger.error(`[MQTT]: Failed Connect to "${mqttTopic}": `, err);
-    }
-  });
-});
+// mqtt.on('connect', () => {
+//   mqtt.subscribe(mqttTopic, (err) => {
+//     if (!err) {
+//       logger.info(`[MQTT]: Success Connect to "${mqttTopic}"`);
+//     } else {
+//       logger.error(`[MQTT]: Failed Connect to "${mqttTopic}": `, err);
+//     }
+//   });
+// });
 
-mqtt.on('message', (topic, payload) => {
-  try {
-    logger.info(`New Data From "${topic}": ${payload}`);
-    if (topic == mqttTopic) {
-      const parsedPayload = JSON.parse(payload.toString()) as DeviceData;
-      DeviceService.recordData(parsedPayload);
-    }
-  } catch (error) {
-    logger.info(`[MQTT]: Error: ${error}`);
-  }
-});
+// mqtt.on('message', (topic, payload) => {
+//   try {
+//     logger.info(`New Data From "${topic}": ${payload}`);
+//     if (topic == mqttTopic) {
+//       const parsedPayload = JSON.parse(payload.toString()) as DeviceData;
+//       DeviceService.recordData(parsedPayload);
+//     }
+//   } catch (error) {
+//     logger.info(`[MQTT]: Error: ${error}`);
+//   }
+// });
