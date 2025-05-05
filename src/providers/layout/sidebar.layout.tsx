@@ -10,9 +10,9 @@ export default function SidebarLayout({
 }) {
   return (
     <>
-      <div class="grid grid-cols-12 w-full h-full">
-        <div class="col-span-1 flex flex-col items-center w-full px-5 py-10">
-          <a href="#" class="mb-20">
+      <div class="grid grid-cols-12 grid-rows-12 w-full h-full">
+        <div class="col-span-12 row-span-1 order-2 lg:col-span-1 lg:row-span-12 lg:order-1 flex flex-row lg:flex-col justify-between items-center lg:items-center w-full px-5 py-10">
+          <a href="#" class="mb-0 lg:mb-20">
             <svg
               class="w-9 h-9 text-white"
               aria-hidden="true"
@@ -39,7 +39,7 @@ export default function SidebarLayout({
               </g>
             </svg>
           </a>
-          <a href="#" class="mb-20">
+          <a href="#" class="mb-0 lg:mb-20">
             <svg
               class="w-9 h-9 text-gray-400"
               aria-hidden="true"
@@ -66,7 +66,7 @@ export default function SidebarLayout({
               </g>
             </svg>
           </a>
-          <a href="#" class="mb-20">
+          <a href="#" class="mb-0 lg:mb-20">
             <svg
               class="w-9 h-9 text-gray-400"
               aria-hidden="true"
@@ -97,7 +97,7 @@ export default function SidebarLayout({
               </g>
             </svg>
           </a>
-          <a href="#" class="mb-20">
+          <a href="#" class="mb-0 lg:mb-20">
             <svg
               class="w-9 h-9 text-gray-400"
               aria-hidden="true"
@@ -114,11 +114,13 @@ export default function SidebarLayout({
               />
             </svg>
           </a>
-          <a href="#" class="mt-auto">
+          <a href="#" class="lg:mt-auto">
             You
           </a>
         </div>
-        <main class="col-span-11 py-8 px-3 my-auto">{children}</main>
+        <main class="col-span-12 row-span-11 order-1 lg:col-span-11 lg:row-span-12 lg:order-2 py-8 px-3 my-0 lg:my-auto">
+          {children}
+        </main>
       </div>
     </>
   );
