@@ -3,12 +3,34 @@ import Layout from '../providers/layout/index.layout';
 import SidebarLayout from '../providers/layout/sidebar.layout';
 import IconCard from '../providers/component/icon.card.comp';
 import DataCard from '../providers/component/data.card';
+import { prisma } from '../providers/database.providers';
+import { SensorWithLatestValue } from '../device/device.model';
 
 export const dashboardWeb = new Hono();
 
 dashboardWeb.get('/', async (c) => {
+  const result = await prisma.$queryRawUnsafe<SensorWithLatestValue[]>(`
+      SELECT 
+        s.sensor_code, 
+        s.description AS sensor_description, 
+        s."type" AS sensor_type,
+        (
+          SELECT sr.value 
+          FROM "SensorRecord" sr 
+          WHERE sr.sensor_id = s.sensor_id 
+          ORDER BY sr.sensor_record_id DESC 
+          FETCH FIRST 1 ROWS ONLY
+        ) AS sensor_value,
+        case  
+          when S."type" = 'temprature' then '°C'
+          when S."type" = 'humidity' then '%'
+          when S."type" = 'hic' then ''
+          when S."type" = 'pm2' then ''
+        end sensor_index
+      FROM "Sensor" s;
+  `);
   return c.html(
-    <Layout>
+    <Layout js={['/public/js/dashboard.js']}>
       <SidebarLayout>
         <h2 class="font-pjs text-white text-xl font-bold mb-5">
           Hallo! Selamat Datang
@@ -23,54 +45,18 @@ dashboardWeb.get('/', async (c) => {
                 iconPath="/public/img/icon/Bed.png"
                 text="Kamar Tidur"
               />
-              <IconCard
-                iconPath="/public/img/icon/Bath.png"
-                text="Kamar Mandi"
-              />
-              <IconCard iconPath="/public/img/icon/Garden.png" text="Kebun" />
-              <IconCard iconPath="/public/img/icon/Home.png" text="Rumah" />
-              <IconCard
-                iconPath="/public/img/icon/Living.png"
-                text="Ruang Keluarga"
-              />
-              <IconCard
-                iconPath="/public/img/icon/Bed.png"
-                text="Kamar Tidur"
-              />
-              <IconCard
-                iconPath="/public/img/icon/Bath.png"
-                text="Kamar Mandi"
-              />
-              <IconCard iconPath="/public/img/icon/Garden.png" text="Kebun" />
-              <IconCard iconPath="/public/img/icon/Home.png" text="Rumah" />
-              <IconCard
-                iconPath="/public/img/icon/Living.png"
-                text="Ruang Keluarga"
-              />
-              <IconCard
-                iconPath="/public/img/icon/Bed.png"
-                text="Kamar Tidur"
-              />
-              <IconCard
-                iconPath="/public/img/icon/Bath.png"
-                text="Kamar Mandi"
-              />
-              <IconCard iconPath="/public/img/icon/Garden.png" text="Kebun" />
-              <IconCard iconPath="/public/img/icon/Home.png" text="Rumah" />
-              <IconCard
-                iconPath="/public/img/icon/Living.png"
-                text="Ruang Keluarga"
-              />
             </div>
           </div>
           <div class="col-span-8 flex">
             {/* TANGGAL */}
             <div class="w-[250px] h-full flex flex-col items-center justify-center me-16">
               <h1 class="font-semibold font-pjs text-9xl text-white">
-                <span id="#hour">10</span> <br />
-                <span id="#min">16</span>
+                <span id="hour">-</span> <br />
+                <span id="min">-</span>
               </h1>
-              <h4 class="text-white text-sm font-light">Minggu, 2 Mei 2025</h4>
+              <h4 class="text-white text-sm font-light" id="date">
+                ...
+              </h4>
             </div>
             {/* SENSOR */}
             <div class="w-full h-full overflow-x-scroll grid grid-cols-8 grid-rows-4">
@@ -124,25 +110,21 @@ dashboardWeb.get('/', async (c) => {
               </div>
 
               {/* DATA FROM SENSOR */}
-              <div class="col-start-3 col-end-5 row-start-1 row-end-4 py-3 px-4 flex flex-col justify-between">
-                <DataCard
-                  sensorValue="28&deg;C"
-                  sensorType="Temprature"
-                  sensorDescription="Measure Temprature in Description"
-                  iconPath="/public/img/icon/rand-2.png"
-                />
-                <DataCard
-                  sensorValue="90%"
-                  sensorType="Humidity"
-                  sensorDescription="Measure Humidity in Percentage"
-                  iconPath="/public/img/icon/rand-3.png"
-                />
-                <DataCard
-                  sensorValue="0"
-                  sensorType="Dust"
-                  sensorDescription="Measure Dust"
-                  iconPath="/public/img/icon/rand-1.png"
-                />
+              <div
+                id="sensor-container"
+                class="col-start-3 col-end-7 row-start-1 row-end-4 py-3 px-4 flex flex-wrap justify-between content-between"
+              >
+                {result.map((value, i) => (
+                  <DataCard
+                    key={`${value.sensor_code}-${value.sensor_type}`} // always include a unique key
+                    id={`${value.sensor_code}-${value.sensor_type}`}
+                    sensorValue={String(value.sensor_value)}
+                    sensorScale={value.sensor_index}
+                    sensorType={value.sensor_type}
+                    sensorDescription={value.sensor_description}
+                    iconPath={`/public/img/icon/rand-${i + 1}.png`}
+                  />
+                ))}
               </div>
               <div class="col-start-1 col-end-5 row-start-4 row-end-5 py-3 px-4 ">
                 <h4 class="text-white font-medium">Bulb Controll</h4>

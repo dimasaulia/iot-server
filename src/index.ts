@@ -16,6 +16,10 @@ import { apiAuthMiddleware } from './middleware/user.middleware';
 import { MqttSingelton } from './providers/mqtt.providers';
 import { deviceController } from './device/device.controller';
 import { dashboardWeb } from './web/dashboard.web';
+import { createBunWebSocket } from 'hono/bun';
+import type { ServerWebSocket } from 'bun';
+
+const { upgradeWebSocket, websocket } = createBunWebSocket<ServerWebSocket>();
 const store = new CookieStore();
 
 type Variables = {
@@ -101,4 +105,5 @@ MqttSingelton.new();
 export default {
   port: Number(Bun.env.PORT),
   fetch: app.fetch,
+  websocket,
 };
