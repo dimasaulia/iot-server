@@ -6,7 +6,7 @@ export default function IconCard({
   text: string;
 }) {
   return (
-    <div class="flex items-center  mb-8">
+    <div class="flex items-center mb-0 lg:mb-8">
       <img class="w-9 h-9" src={iconPath} alt={`icon untuk menuk ${text}`} />
       <h4 class="ms-2 text-[15px] font-extralight text-white">{text}</h4>
     </div>

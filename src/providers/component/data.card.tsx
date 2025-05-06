@@ -16,7 +16,7 @@ export default function DataCard({
   return (
     <div
       id={`container-${id}`}
-      class="w-[47%] h-48 rounded-md p-[0.5px] bg-gradient-to-tr from-transparent via-transparent to-white/50"
+      class="w-[47%] h-48 rounded-md p-[0.5px] mb-5 lg:mb-0 bg-gradient-to-tr from-transparent via-transparent to-white/50"
     >
       <div class="grid grid-cols-5 h-full bg-gradient-to-tr from-slate-700 via-slate-800 to-slate-950 p-2 rounded-md">
         <div class="col-span-3 my-auto">
