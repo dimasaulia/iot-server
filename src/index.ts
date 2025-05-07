@@ -15,6 +15,7 @@ import { authWeb } from './web/auth.web';
 import { apiAuthMiddleware } from './middleware/user.middleware';
 import { MqttSingelton } from './providers/mqtt.providers';
 import { deviceController } from './device/device.controller';
+import { monitoringController } from './monitoring/monitoring.controller';
 const store = new CookieStore();
 
 type Variables = {
@@ -59,12 +60,11 @@ app.get('/', async (c) => {
 app.get('/private', apiAuthMiddleware, async (c) => {
   return c.text('Welcome to IoT Server');
 });
-app.get('/health', async (c) => {
-  return c.text('Server Working');
-});
+
 app.route('/auth', authWeb);
 app.route('/api/users/', userController);
 app.route('/api/device', deviceController);
+app.route('/api/health', monitoringController);
 
 app.onError(async (err, c) => {
   if (err instanceof HTTPException) {
