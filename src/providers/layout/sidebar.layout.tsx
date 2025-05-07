@@ -11,7 +11,7 @@ export default function SidebarLayout({
   return (
     <>
       <div class="grid grid-cols-12 grid-rows-12 w-full h-full">
-        <div class="col-span-12 row-span-1 order-2 lg:col-span-1 lg:row-span-12 lg:order-1 flex flex-row lg:flex-col justify-between items-center lg:items-center w-full px-5 py-10">
+        <div class="col-span-12 row-span-1 order-2 lg:col-span-1 lg:row-span-12 lg:order-1 flex flex-row lg:flex-col justify-between items-center lg:items-center w-full px-5 py-10 z-[99]!">
           <a href="#" class="mb-0 lg:mb-20">
             <svg
               class="w-9 h-9 text-white"

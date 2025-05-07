@@ -47,10 +47,10 @@ dashboardWeb.get('/', async (c) => {
               />
             </div>
           </div>
-          <div class="col-span-10 lg:col-span-8 order-1 lg:order-2 h-[47rem] md:h-auto bg-green-400 overflow-y-scroll">
+          <div class="col-span-10 lg:col-span-8 order-1 lg:order-2 h-[29rem] md:h-auto overflow-y-scroll">
             <div class="h-auto md:h-full flex flex-col items-center lg:flex-row overflow-y-scroll">
               {/* TANGGAL */}
-              <div class="w-[250px] h-32 lg:h-full flex flex-col items-center justify-center me-0 lg:me-16 bg-pink-400">
+              <div class="w-[250px] h-32 lg:h-full flex flex-col items-center justify-center me-0 lg:me-16">
                 <h1 class="font-semibold font-pjs text-7xl lg:text-9xl text-white">
                   <span id="hour">-</span>
                   <span class="hidden lg:block"></span>
@@ -62,12 +62,12 @@ dashboardWeb.get('/', async (c) => {
                 </h4>
               </div>
               {/* SENSOR */}
-              <div class="w-full h-auto overflow-x-scroll grid grid-cols-8 grid-rows-4 bg-purple-500 ">
+              <div class="w-full h-auto overflow-x-hidden md:overflow-x-scroll grid grid-cols-8 grid-rows-4 ">
                 {/* DATA FROM WHEATER API */}
-                <div class="col-start-1 col-end-9 md:col-start-1 md:col-end-3 row-start-1 row-end-1 md:row-start-1 md:row-end-4 py-3 px-4 bg-red-500">
-                  <div class="relative w-full h-full rounded-md overflow-hidden">
+                <div class="col-start-1 col-end-9 md:col-start-1 md:col-end-3 row-start-1 row-end-1 md:row-start-1 md:row-end-4 py-3 px-4 bg-purple-500-500 z-10">
+                  <div class="relative w-full h-full rounded-md overflow-hidden z-10">
                     <img
-                      class="w-full h-full object-cover absolute inset-0"
+                      class="w-full h-full object-cover absolute inset-0 z-10"
                       src="https://images.unsplash.com/photo-1591925323320-f2246a3cfd36?q=80&w=1944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                       alt=""
                     />
@@ -115,7 +115,7 @@ dashboardWeb.get('/', async (c) => {
                 {/* DATA FROM SENSOR */}
                 <div
                   id="sensor-container"
-                  class="col-start-1 col-end-9 md:col-start-3 md:col-end-7 row-start-2 md:row-start-1 row-end-2 md:row-end-4 py-3 px-4 flex flex-wrap justify-between content-between bg-black"
+                  class="col-start-1 col-end-9 md:col-start-3 md:col-end-7 row-start-2 md:row-start-1 row-end-2 md:row-end-4 py-3 px-4 flex flex-wrap justify-between content-between"
                 >
                   {result.map((value, i) => (
                     <DataCard
@@ -129,7 +129,7 @@ dashboardWeb.get('/', async (c) => {
                     />
                   ))}
                 </div>
-                <div class="col-start-1 col-end-9 lg:col-start-1 lg:col-end-5 row-start-3 row-end-3 lg:row-start-4 lg:row-end-5 py-3 px-4 bg-yellow-500">
+                <div class="col-start-1 col-end-9 lg:col-start-1 lg:col-end-5 row-start-3 row-end-3 lg:row-start-4 lg:row-end-5 py-3 px-4">
                   <h4 class="text-white font-medium">Bulb Controll</h4>
                   <div class="slider-wrapper">
                     <input type="range" name="led" id="led" />

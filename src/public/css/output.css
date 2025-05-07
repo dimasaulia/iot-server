@@ -1136,6 +1136,10 @@ input:checked + .toggle-bg {
   z-index: 50;
 }
 
+.z-\[99\] {
+  z-index: 99;
+}
+
 .order-1 {
   order: 1;
 }
@@ -1176,52 +1180,28 @@ input:checked + .toggle-bg {
   grid-row: span 11 / span 11;
 }
 
-.row-span-10 {
-  grid-row: span 10 / span 10;
-}
-
-.row-span-8 {
-  grid-row: span 8 / span 8;
-}
-
 .row-start-1 {
   grid-row-start: 1;
-}
-
-.row-start-6 {
-  grid-row-start: 6;
-}
-
-.row-start-4 {
-  grid-row-start: 4;
-}
-
-.row-start-3 {
-  grid-row-start: 3;
 }
 
 .row-start-2 {
   grid-row-start: 2;
 }
 
+.row-start-3 {
+  grid-row-start: 3;
+}
+
 .row-end-1 {
   grid-row-end: 1;
 }
 
-.row-end-7 {
-  grid-row-end: 7;
-}
-
-.row-end-4 {
-  grid-row-end: 4;
+.row-end-2 {
+  grid-row-end: 2;
 }
 
 .row-end-3 {
   grid-row-end: 3;
-}
-
-.row-end-2 {
-  grid-row-end: 2;
 }
 
 .mx-auto {
@@ -1347,60 +1327,36 @@ input:checked + .toggle-bg {
   height: 2.25rem;
 }
 
-.h-\[58rem\] {
-  height: 58rem;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.h-\[48rem\] {
-  height: 48rem;
-}
-
-.h-\[32rem\] {
-  height: 32rem;
-}
-
-.h-\[38rem\] {
-  height: 38rem;
-}
-
-.h-10 {
-  height: 2.5rem;
-}
-
-.h-\[46rem\] {
-  height: 46rem;
-}
-
-.h-\[100rem\] {
-  height: 100rem;
-}
-
-.h-\[90rem\] {
-  height: 90rem;
+.h-\[47rem\] {
+  height: 47rem;
 }
 
 .h-auto {
   height: auto;
 }
 
-.h-\[45rem\] {
-  height: 45rem;
+.h-full {
+  height: 100%;
 }
 
-.h-\[47rem\] {
-  height: 47rem;
+.h-20 {
+  height: 5rem;
+}
+
+.h-28 {
+  height: 7rem;
 }
 
 .h-\[30rem\] {
   height: 30rem;
 }
 
-.h-24 {
-  height: 6rem;
+.h-\[20rem\] {
+  height: 20rem;
+}
+
+.h-\[29rem\] {
+  height: 29rem;
 }
 
 .w-1\/2 {
@@ -1433,14 +1389,6 @@ input:checked + .toggle-bg {
 
 .w-full {
   width: 100%;
-}
-
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-\[25px\] {
-  width: 25px;
 }
 
 .flex-1 {
@@ -1717,6 +1665,11 @@ input:checked + .toggle-bg {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1)) !important;
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
 .bg-blue-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(235 245 255 / var(--tw-bg-opacity, 1));
@@ -1766,14 +1719,19 @@ input:checked + .toggle-bg {
   background-color: rgb(241 126 184 / var(--tw-bg-opacity, 1));
 }
 
-.bg-purple-700 {
+.bg-purple-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(108 43 217 / var(--tw-bg-opacity, 1));
+  background-color: rgb(144 97 249 / var(--tw-bg-opacity, 1));
 }
 
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 242 242 / var(--tw-bg-opacity, 1));
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 82 82 / var(--tw-bg-opacity, 1));
 }
 
 .bg-slate-100 {
@@ -1788,26 +1746,6 @@ input:checked + .toggle-bg {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-yellow-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 202 21 / var(--tw-bg-opacity, 1));
-}
-
-.bg-purple-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(144 97 249 / var(--tw-bg-opacity, 1));
-}
-
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(240 82 82 / var(--tw-bg-opacity, 1));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
 .bg-yellow-500 {
@@ -2546,6 +2484,10 @@ input[type='range']::-moz-range-thumb {
     grid-row-end: 4;
   }
 
+  .md\:h-auto {
+    height: auto;
+  }
+
   .md\:h-full {
     height: 100%;
   }
@@ -2554,16 +2496,20 @@ input[type='range']::-moz-range-thumb {
     height: 2.5rem;
   }
 
-  .md\:h-\[50\%\] {
-    height: 50%;
-  }
-
-  .md\:h-auto {
-    height: auto;
-  }
-
   .md\:w-1\/2 {
     width: 50%;
+  }
+
+  .md\:w-\[47\%\] {
+    width: 47%;
+  }
+
+  .md\:overflow-x-scroll {
+    overflow-x: scroll;
+  }
+
+  .md\:overflow-y-scroll {
+    overflow-y: scroll;
   }
 }
 
@@ -2649,10 +2595,6 @@ input[type='range']::-moz-range-thumb {
     height: 600px;
   }
 
-  .lg\:h-\[full\] {
-    height: full;
-  }
-
   .lg\:h-full {
     height: 100%;
   }
@@ -2673,28 +2615,8 @@ input[type='range']::-moz-range-thumb {
     flex-direction: column;
   }
 
-  .lg\:content-center {
-    align-content: center;
-  }
-
-  .lg\:content-around {
-    align-content: space-around;
-  }
-
   .lg\:items-center {
     align-items: center;
-  }
-
-  .lg\:justify-center {
-    justify-content: center;
-  }
-
-  .lg\:justify-between {
-    justify-content: space-between;
-  }
-
-  .lg\:overflow-x-scroll {
-    overflow-x: scroll;
   }
 
   .lg\:text-9xl {
