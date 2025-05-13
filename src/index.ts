@@ -20,6 +20,7 @@ import { createBunWebSocket } from 'hono/bun';
 import type { ServerWebSocket } from 'bun';
 
 const { upgradeWebSocket, websocket } = createBunWebSocket<ServerWebSocket>();
+import { monitoringController } from './monitoring/monitoring.controller';
 const store = new CookieStore();
 
 type Variables = {
@@ -64,13 +65,12 @@ app.get('/', async (c) => {
 app.get('/private', apiAuthMiddleware, async (c) => {
   return c.text('Welcome to IoT Server');
 });
-app.get('/health', async (c) => {
-  return c.text('Server Working');
-});
+
 app.route('/auth', authWeb);
 app.route('/dashboard', dashboardWeb);
 app.route('/api/users/', userController);
 app.route('/api/device', deviceController);
+app.route('/api/health', monitoringController);
 
 app.onError(async (err, c) => {
   if (err instanceof HTTPException) {
