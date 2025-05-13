@@ -20,7 +20,7 @@ ws.onmessage = (event) => {
 };
 
 ws.onopen = () => console.log('Connected to WebSocket');
-ws.onclose = () => console.log('Disconnected');
+ws.onclose = (e) => console.log('Disconnected, ', e);
 
 function loadDate() {
   const dateTime = new Date();
